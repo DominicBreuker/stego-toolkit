@@ -27,7 +27,8 @@ RUN pip install tqdm
 ENV DEBIAN_FRONTEND noninteractive
 
 COPY install /tmp/install
-RUN /tmp/install/jphide.sh && \
+RUN /tmp/install/hideme.sh && \
+    /tmp/install/jphide.sh && \
     /tmp/install/jsteg.sh && \
     /tmp/install/mp3stego.sh && \
     /tmp/install/openstego.sh && \
