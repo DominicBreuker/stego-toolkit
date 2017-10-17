@@ -20,8 +20,8 @@ WINEARCH=win32 WINEPREFIX=/root/.wine winecfg
 # Download and install notepad++ (32 bit / 64 bit) for testing
 wget -O /tmp/notepad32.7z https://notepad-plus-plus.org/repository/7.x/7.5.1/npp.7.5.1.bin.7z
 wget -O /tmp/notepad64.7z https://notepad-plus-plus.org/repository/7.x/7.5.1/npp.7.5.1.bin.x64.7z
-7z e -o/opt/notepad32 /tmp/notepad32.7z
-7z e -o/opt/notepad64 /tmp/notepad64.7z
+7z e -o/opt/notepad32 -y /tmp/notepad32.7z
+7z e -o/opt/notepad64 -y /tmp/notepad64.7z
 rm /tmp/notepad32.7z
 rm /tmp/notepad64.7z
 
