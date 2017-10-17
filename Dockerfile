@@ -40,6 +40,7 @@ RUN /tmp/install/hideme.sh && \
     /tmp/install/stegoVeritas.sh && \
     /tmp/install/stegsolve.sh && \
     /tmp/install/wine.sh && \
+    /tmp/install/winetricks.sh && \
     /tmp/install/zsteg.sh && \
     rm -rf /tmp/install
 
