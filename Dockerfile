@@ -22,13 +22,31 @@ RUN apt-get update && \
 
 RUN pip3 install python-magic
 
-RUN pip install Stegano
+RUN pip install tqdm
+
+ENV DEBIAN_FRONTEND noninteractive
 
 COPY install /tmp/install
-RUN /tmp/install/stegdetect.sh && \
+RUN /tmp/install/jphide.sh && \
     /tmp/install/jsteg.sh && \
-    /tmp/install/jphide.sh && \
+    /tmp/install/mp3stego.sh && \
+    /tmp/install/openstego.sh && \
     /tmp/install/outguess-1.3.sh && \
+    /tmp/install/steg.sh && \
+    /tmp/install/steganabara.sh && \
+    /tmp/install/stegano.sh && \
+    /tmp/install/stegdetect.sh && \
+    /tmp/install/stegoVeritas.sh && \
+    /tmp/install/stegsolve.sh && \
+    /tmp/install/wine.sh && \
+    /tmp/install/zsteg.sh && \
     rm -rf /tmp/install
+
+RUN apt-get install -y crunch \
+                       cewl \
+                       sonic-visualiser
+
+COPY scripts /opt/scripts
+ENV PATH="/opt/scripts:${PATH}"
 
 WORKDIR /data
