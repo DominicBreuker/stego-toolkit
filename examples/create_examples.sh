@@ -3,12 +3,12 @@
 PASSPHRASE=abcd
 COVER_IMAGE_JPG=ORIGINAL.jpg
 COVER_IMAGE_PNG=ORIGINAL.png
-COVER_IMAGE_PNG=ORIGINAL.wav
-COVER_IMAGE_PNG=ORIGINAL.mp3
+COVER_AUDIO_WAV=ORIGINAL.wav
+COVER_AUDIO_MP3=ORIGINAL.mp3
 STEGO_FILES_FOLDER_JPG=stego-files/jpg
 STEGO_FILES_FOLDER_PNG=stego-files/png
-STEGO_FILES_FOLDER_PNG=stego-files/wav
-STEGO_FILES_FOLDER_PNG=stego-files/mp3
+STEGO_FILES_FOLDER_WAV=stego-files/wav
+STEGO_FILES_FOLDER_MP3=stego-files/mp3
 
 if [ ! -e $COVER_IMAGE_JPG ]; then
     echo "Original image file $COVER_IMAGE_JPG does not exist. Exiting..."
@@ -53,26 +53,31 @@ echo "Embedding into $COVER_IMAGE now ..."
 
 ############# steghide #############
 
+echo ""
 echo "... steghide"
 steghide embed -f -ef $SECRET_MESSAGE -cf $COVER_IMAGE -p $PASSPHRASE -sf $STEGO_FILES_FOLDER/steghide.jpg
 
 ############# outguess #############
 
+echo ""
 echo "... outguess"
 outguess -k $PASSPHRASE -d $SECRET_MESSAGE $COVER_IMAGE $STEGO_FILES_FOLDER/outguess.jpg
 
 ############# outguess-0.13 #############
 
+echo ""
 echo "... outguess"
 outguess-0.13 -k $PASSPHRASE -d $SECRET_MESSAGE $COVER_IMAGE $STEGO_FILES_FOLDER/outguess-0.13.jpg
 
 ############# jphide/jpseek #############
 
+# echo ""
 # echo "... jphide (interactive passphrase, use '$PASSPHRASE')"
 # jphide $COVER_IMAGE $STEGO_FILES_FOLDER/jphide.jpg $SECRET_MESSAGE
 
 ############# jsteg #############
 
+echo ""
 echo "... jsteg (has no passphrase)"
 jsteg hide $COVER_IMAGE $SECRET_MESSAGE $STEGO_FILES_FOLDER/jsteg.jpg
 
@@ -93,11 +98,13 @@ echo "Embedding into $COVER_IMAGE now ..."
 
 ############# stegano-lsb #############
 
+echo ""
 echo "... stegano-lsb (no passphrase)"
 stegano-lsb hide --input $COVER_IMAGE -f $SECRET_MESSAGE -e UTF-8 --output $STEGO_FILES_FOLDER/stegano-lsb.png
 
 ############# stegano-lsb-set #############
 
+echo ""
 echo "... stegano-lsb-set (no passphrase)"
 
 # Only these four generators work! There are more. Check out `stegano-lsb-set hide -h`
@@ -108,17 +115,42 @@ echo "... stegano-lsb-set (no passphrase)"
 
 ############# stegano-red #############
 
-echo "... stegano-red (no passphrase, encoding base64 manually)"
-stegano-red hide --input $COVER_IMAGE -m $SECRET_MESSAGE_B64 --output $STEGO_FILES_FOLDER/stegano-red.png
+# echo "... stegano-red (no passphrase, encoding base64 manually)"
+# stegano-red hide --input $COVER_IMAGE -m $SECRET_MESSAGE_B64 --output $STEGO_FILES_FOLDER/stegano-red.png
 
 ###############################
 ############# WAV #############
 ###############################
 
-############# AudioStego #############
-
 COVER_AUDIO=$COVER_AUDIO_WAV
 STEGO_FILES_FOLDER=$STEGO_FILES_FOLDER_WAV
 
+# ############# AudioStego #############
+
+echo ""
 echo "... AudioStego/hideme (no passphrase)"
-hideme hide $COVER_AUDIO $SECRET_MESSAGE && pwd && ls && mv ./output.wav $STEGO_FILES_FOLDER/hideme.wav
+hideme $COVER_AUDIO $SECRET_MESSAGE && mv ./output.wav $STEGO_FILES_FOLDER/hideme.wav
+
+###############################
+############# MP3 #############
+###############################
+
+COVER_AUDIO=$COVER_AUDIO_MP3
+STEGO_FILES_FOLDER=$STEGO_FILES_FOLDER_MP3
+# rm -rf $STEGO_FILES_FOLDER_MP3/*
+
+# ############# AudioStego #############
+
+echo ""
+echo "... AudioStego/hideme (no passphrase)"
+hideme $COVER_AUDIO $SECRET_MESSAGE && mv ./output.mp3 $STEGO_FILES_FOLDER/hideme.mp3
+
+# ############# mp3stego #############
+
+echo ""
+echo "... mp3stego - Input = WAV | Output = MP3"
+# preprocess WAV file with "bitexact" flag to reduce the chance of mp3stego throwing errors...
+TMP_COVER_AUDIO_FILE=/tmp/tmp_cover_audio.wav
+ffmpeg -loglevel panic -i $COVER_AUDIO -flags bitexact $TMP_COVER_AUDIO_FILE
+mp3stego-encode -E $SECRET_MESSAGE -P $PASSPHRASE $TMP_COVER_AUDIO_FILE $STEGO_FILES_FOLDER_MP3/mp3stego.mp3
+rm $TMP_COVER_AUDIO_FILE
