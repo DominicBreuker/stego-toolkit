@@ -4,9 +4,9 @@
 
 ### Installed applications
 
-|Tool          |File types                |Description       |Commands    |
-|--------------|--------------------------|------------------|------------|
-|[AudioStego](https://github.com/danielcardeenas/AudioStego)|Audio (MP3 / WAV)| hideme | Hide with `hideme cover.mp3 secret.txt && mv ./output.mp3 stego.mp3`. Recover with `hideme stego.mp3 -f && cat output.txt` |
+|Tool          |File types                |Description       |How to hide    | How to recover |
+|--------------|--------------------------|------------------|---------------|----------------|
+|[AudioStego](https://github.com/danielcardeenas/AudioStego)|Audio (MP3 / WAV)| Details on how it works are in this [blog post](https://danielcardeenas.github.io/audiostego.html) | `hideme cover.mp3 secret.txt && mv ./output.mp3 stego.mp3` | `hideme stego.mp3 -f && cat output.txt` |
 
 
 Basic checks can be done with the check scripts:
