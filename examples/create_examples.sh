@@ -3,8 +3,12 @@
 PASSPHRASE=abcd
 COVER_IMAGE_JPG=ORIGINAL.jpg
 COVER_IMAGE_PNG=ORIGINAL.png
+COVER_IMAGE_PNG=ORIGINAL.wav
+COVER_IMAGE_PNG=ORIGINAL.mp3
 STEGO_FILES_FOLDER_JPG=stego-files/jpg
 STEGO_FILES_FOLDER_PNG=stego-files/png
+STEGO_FILES_FOLDER_PNG=stego-files/wav
+STEGO_FILES_FOLDER_PNG=stego-files/mp3
 
 if [ ! -e $COVER_IMAGE_JPG ]; then
     echo "Original image file $COVER_IMAGE_JPG does not exist. Exiting..."
@@ -14,13 +18,24 @@ if [ ! -e $COVER_IMAGE_PNG ]; then
     echo "Original image file $COVER_IMAGE_PNG does not exist. Exiting..."
     exit 1
 fi
+if [ ! -e $COVER_AUDIO_WAV ]; then
+    echo "Original audio file $COVER_AUDIO_WAV does not exist. Exiting..."
+    exit 1
+fi
+if [ ! -e $COVER_AUDIO_MP3 ]; then
+    echo "Original audio file $COVER_AUDIO_MP3 does not exist. Exiting..."
+    exit 1
+fi
 mkdir -p $STEGO_FILES_FOLDER_JPG
 mkdir -p $STEGO_FILES_FOLDER_PNG
+mkdir -p $STEGO_FILES_FOLDER_WAV
+mkdir -p $STEGO_FILES_FOLDER_MP3
 
 echo "Embedding secret message into images using various tools"
 echo "Passphrase: '$PASSPHRASE'"
 
 SECRET_MESSAGE=secret_message.txt
+SECRET_MESSAGE_B64="`cat $SECRET_MESSAGE | base64`"
 echo ""
 echo "########### SECRET MESSAGE ###########"
 cat $SECRET_MESSAGE
@@ -61,7 +76,6 @@ outguess-0.13 -k $PASSPHRASE -d $SECRET_MESSAGE $COVER_IMAGE $STEGO_FILES_FOLDER
 echo "... jsteg (has no passphrase)"
 jsteg hide $COVER_IMAGE $SECRET_MESSAGE $STEGO_FILES_FOLDER/jsteg.jpg
 
-
 ###############################
 ############# PNG #############
 ###############################
@@ -95,5 +109,16 @@ echo "... stegano-lsb-set (no passphrase)"
 ############# stegano-red #############
 
 echo "... stegano-red (no passphrase, encoding base64 manually)"
-SECRET_MESSAGE_B64="`cat $SECRET_MESSAGE | base64`"
 stegano-red hide --input $COVER_IMAGE -m $SECRET_MESSAGE_B64 --output $STEGO_FILES_FOLDER/stegano-red.png
+
+###############################
+############# WAV #############
+###############################
+
+############# AudioStego #############
+
+COVER_AUDIO=$COVER_AUDIO_WAV
+STEGO_FILES_FOLDER=$STEGO_FILES_FOLDER_WAV
+
+echo "... AudioStego/hideme (no passphrase)"
+hideme hide $COVER_AUDIO $SECRET_MESSAGE && pwd && ls && mv ./output.wav $STEGO_FILES_FOLDER/hideme.wav

@@ -2,6 +2,13 @@
 
 ## Tools
 
+### Installed applications
+
+|Tool          |File types                |Description       |Commands    |
+|--------------|--------------------------|------------------|------------|
+|[AudioStego](https://github.com/danielcardeenas/AudioStego)|Audio (MP3 / WAV)| hideme | Hide with `hideme cover.mp3 secret.txt && mv ./output.mp3 stego.mp3`. Recover with `hideme stego.mp3 -f && cat output.txt` |
+
+
 Basic checks can be done with the check scripts:
 - check_jpg.sh: Screen a jpg image, e.g., `check_jpg.sh IMAGE.jpg`
 - brute_jpg.sh: Brute force stego in a jpg image, e.g., `brute_jpg.sh IMAGE.jpg WORDLIST.txt`
@@ -27,3 +34,4 @@ Be able to spot codes. Check out this cheat sheet:
 ## References
 
 Demo image: https://pixabay.com/p-1685092
+Demo sound file: https://upload.wikimedia.org/wikipedia/commons/9/97/De-Ich_bin_ein_Berliner2.ogg --- By John Fitzgerald Kennedy [Public domain], via Wikimedia Commons
