@@ -1,7 +1,7 @@
 # Steganography Toolkit
 
 This project is a Docker image useful for solving Steganography challenges as those you can find at CTF platforms like [hackthebox.eu](https://www.hackthebox.eu/).
-The image comes preinstalled with many popular (see list [below](#tools)) and several screening scripts you can use check simple things (for instance, run `check_jpg.sh image.jpg` to get a report on that file).
+The image comes preinstalled with many popular (see list [below](#tools)) and several screening scripts you can use check simple things (for instance, run `check_jpg.sh image.jpg` to get a report for this JPG file).
 
 [![Docker build status](https://img.shields.io/docker/build/mariobehling/loklak.svg)](https://hub.docker.com/r/dominicbreuker/stego-toolkit/)
 
@@ -160,6 +160,14 @@ Use X11 forwarding through SSH if you want to go this way. Run `start_ssh` insid
 
 To not depend on X11, the image comes with a TigerVNC server and noVNC client.
 You can use it to open an HTML5 VNC session with your browser to connect to the containers Xfce desktop. To to that, run `start_vnc.sh` inside the container to start server and client, make sure you expose port 6901 when starting the container `docker run -p 127.0.0.1:6901:6901 ...` and go to `localhost:6901/?password=<the_password>` (the script prints the password).
+
+### Using SSH with X11 forwarding
+
+![animated demo gif - SSH + X11](https://i.imgur.com/aRJtbnP.gif)
+
+### Using Browser and VNC
+
+![animated demo gif - Browser + VNC](https://i.imgur.com/G6oUn3M.gif)
 
 ## Link collection
 
