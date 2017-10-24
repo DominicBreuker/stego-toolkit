@@ -47,7 +47,7 @@ RUN find /tmp/install -name '*.sh' -exec chmod a+x {} + && \
 
 COPY scripts /opt/scripts
 RUN find /opt/scripts -name '*.sh' -exec chmod a+x {} + && \
-    find /opt/scripts -name '*.py' -exec chmod a+x {} + && \
+    find /opt/scripts -name '*.py' -exec chmod a+x {} +
 ENV PATH="/opt/scripts:${PATH}"
 
 WORKDIR /data
