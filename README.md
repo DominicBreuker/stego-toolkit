@@ -1,7 +1,7 @@
 # Steganography Toolkit
 
 This project is a Docker image useful for solving Steganography challenges as those you can find at CTF platforms like [hackthebox.eu](https://www.hackthebox.eu/).
-The image comes preinstalled with many popular (see list [below](#Tools)) and several screening scripts you can use check simple things.
+The image comes preinstalled with many popular (see list [below](#tools)) and several screening scripts you can use check simple things.
 
 [![Docker build status](https://img.shields.io/docker/build/mariobehling/loklak.svg)](https://hub.docker.com/r/dominicbreuker/stego-toolkit/)
 
@@ -23,10 +23,10 @@ If you don't use the scripts, follow these steps:
   - Run `start_vnc.sh` and connect to the container's Desktop through your browser
 
 Check out the following sections for more information:
-- What tools are installed? Go [here](##Tools)
-- What scripts can I run to quickly screen files automatically or brute force them? Go [here](#Screening-scripts)
-- How can I play with different Steganography examples to see if I can break them? Go [here](#Steganography-examples)
-- How can I run GUI tools inside the container? go [here](#GUI-and-Containers)
+- What tools are installed? Go [here](#tools)
+- What scripts can I run to quickly screen files automatically or brute force them? Go [here](#screening-scripts)
+- How can I play with different Steganography examples to see if I can break them? Go [here](#steganography-examples)
+- How can I run GUI tools inside the container? go [here](#gui-and-containers)
 
 ## Tools
 
