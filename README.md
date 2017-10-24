@@ -167,7 +167,7 @@ You can use it to open an HTML5 VNC session with your browser to connect to the 
 
 ### Using Browser and VNC
 
-![animated demo gif - Browser + VNC](https://i.imgur.com/G6oUn3M.gif)
+![animated demo gif - Browser + VNC](https://i.imgur.com/3tkw498.gif)
 
 ## Link collection
 
