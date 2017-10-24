@@ -12,13 +12,12 @@ NO_VNC_PORT=6901
 VNC_RESOLUTION=1024x768
 VNC_COL_DEPTH=24
 
-# Set random password for VNC and SSH
-VNC_PW=password # TODO: make random
+# Generate random password
 PASSWORD=$(openssl rand -hex 12)
 
 mkdir -p "$HOME/.vnc"
 PASSWD_PATH="$HOME/.vnc/passwd"
-echo "$VNC_PW" | vncpasswd -f >> $PASSWD_PATH
+echo "$PASSWORD" | vncpasswd -f >> $PASSWD_PATH
 chmod 600 $PASSWD_PATH
 
 # Start vnc server
