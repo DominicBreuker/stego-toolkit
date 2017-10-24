@@ -1,7 +1,7 @@
 # Steganography Toolkit
 
 This project is a Docker image useful for solving Steganography challenges as those you can find at CTF platforms like [hackthebox.eu](https://www.hackthebox.eu/).
-The image comes preinstalled with many popular (see list [below](#tools)) and several screening scripts you can use check simple things.
+The image comes preinstalled with many popular (see list [below](#tools)) and several screening scripts you can use check simple things (for instance, run `check_jpg.sh image.jpg` to get a report on that file).
 
 [![Docker build status](https://img.shields.io/docker/build/mariobehling/loklak.svg)](https://hub.docker.com/r/dominicbreuker/stego-toolkit/)
 
@@ -17,7 +17,7 @@ It will have the `data` folder mounted, into which you can put the files to anal
 If you don't use the scripts, follow these steps:
 1. Build image (`docker build -t <image_name> .`) or pull from Docker hub (`docker pull dominicbreuker/stego`)
 2. Start a container with your files mounted to the folder `/data` (`docker run -it <image_name> -v /local/folder/with/data:/data /bin/bash`)
-3. Use CLI tools and screening scripts on your files
+3. Use CLI tools and screening scripts on your files: e.g., run `check_jpg.sh image.jpg` creates a report, or run `brute_jpg.sh image.jpg wordlist.txt` tries to extract data with various tools and passwords
 4. If you want to run GUI tools use one of these two ways:
   - Run `start_ssh.sh` and connect to your container with X11 forwarding
   - Run `start_vnc.sh` and connect to the container's Desktop through your browser
