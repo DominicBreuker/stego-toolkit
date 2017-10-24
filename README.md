@@ -28,6 +28,10 @@ Check out the following sections for more information:
 - How can I play with different Steganography examples to see if I can break them? Go [here](#steganography-examples)
 - How can I run GUI tools inside the container? go [here](#gui-and-containers)
 
+## Demo
+
+![animated demo gif](https://i.imgur.com/hnNN6GK.gif)
+
 ## Tools
 
 Many different Linux and Windows tools are installed.
