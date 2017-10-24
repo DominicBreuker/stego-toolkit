@@ -30,7 +30,7 @@ Check out the following sections for more information:
 
 ## Demo
 
-![animated demo gif](https://i.imgur.com/oRmsJ2C.gif)
+![animated demo gif](https://i.imgur.com/UW8CKFV.gif)
 
 ## Tools
 
