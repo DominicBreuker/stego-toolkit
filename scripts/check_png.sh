@@ -37,6 +37,9 @@ echo "Checking file $FILE"
 echo
 file $FILE
 
+echo "identify $FILE:"
+identify  -verbose $FILE
+
 echo
 echo "##############################"
 echo "########## exiftool ##########"

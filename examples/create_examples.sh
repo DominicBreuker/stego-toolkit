@@ -93,8 +93,9 @@ echo "Embedding into $COVER_IMAGE now ..."
 
 ############# openstego #############
 
-# echo "... openstego"
-# openstego embed -mf $SECRET_MESSAGE -cf $COVER_IMAGE -p $PASSPHRASE -sf $STEGO_FILES_FOLDER/openstego.png
+echo ""
+echo "... openstego"
+openstego embed -mf $SECRET_MESSAGE -cf $COVER_IMAGE -p $PASSPHRASE -sf $STEGO_FILES_FOLDER/openstego.png
 
 ############# stegano-lsb #############
 
@@ -113,9 +114,12 @@ echo "... stegano-lsb-set (no passphrase)"
 #   stegano-lsb-set hide --input $COVER_IMAGE -f $SECRET_MESSAGE -e UTF-8 -g $GENERATOR --output $STEGO_FILES_FOLDER/stegano-lsb-set-$GENERATOR.png
 # done
 
+# TODO: reveal currently thows a python error ... check out why `stegano-lsb-set reveal -i stegano-lsb-set-composite.png -e UTF-8 -g composite -o output.txt`
+
 ############# stegano-red #############
 
-# echo "... stegano-red (no passphrase, encoding base64 manually)"
+echo ""
+echo "... stegano-red (no passphrase, encoding base64 manually)"
 # stegano-red hide --input $COVER_IMAGE -m $SECRET_MESSAGE_B64 --output $STEGO_FILES_FOLDER/stegano-red.png
 
 ###############################
@@ -131,13 +135,18 @@ echo ""
 echo "... AudioStego/hideme (no passphrase)"
 hideme $COVER_AUDIO $SECRET_MESSAGE && mv ./output.wav $STEGO_FILES_FOLDER/hideme.wav
 
+############# steghide #############
+
+echo ""
+echo "... steghide"
+steghide embed -f -ef $SECRET_MESSAGE -cf $COVER_AUDIO -p $PASSPHRASE -sf $STEGO_FILES_FOLDER/steghide.wav
+
 ###############################
 ############# MP3 #############
 ###############################
 
 COVER_AUDIO=$COVER_AUDIO_MP3
 STEGO_FILES_FOLDER=$STEGO_FILES_FOLDER_MP3
-# rm -rf $STEGO_FILES_FOLDER_MP3/*
 
 # ############# AudioStego #############
 

@@ -6,7 +6,7 @@ FOLDER="$(dirname $script)"
 source $FOLDER/shared.sh
 PROJECT_ROOT="$(abspath $FOLDER/..)"
 
-echo "building Docker image in folder $PROJECT_ROOT"
+echo "Building Docker image now..."
 
 docker build -f $PROJECT_ROOT/Dockerfile \
              -t $IMAGE_NAME \

@@ -35,7 +35,11 @@ echo "########## JPG CHECKER ##########"
 echo "#################################"
 echo "Checking file $FILE"
 echo
+echo "file $FILE:"
 file $FILE
+
+echo "identify $FILE:"
+identify -verbose $FILE
 
 echo
 echo "##############################"

@@ -18,7 +18,12 @@ RUN apt-get update && \
                        autotools-dev \
                        automake \
                        libevent-dev \
-                       bsdmainutils
+                       bsdmainutils \
+                       ffmpeg \
+                       crunch \
+                       cewl \
+                       sonic-visualiser \
+                       atomicparsley
 
 RUN pip3 install python-magic
 
@@ -27,29 +32,22 @@ RUN pip install tqdm
 ENV DEBIAN_FRONTEND noninteractive
 
 COPY install /tmp/install
-RUN /tmp/install/hideme.sh && \
-    /tmp/install/jphide.sh && \
-    /tmp/install/jsteg.sh && \
-    /tmp/install/mp3stego.sh && \
-    /tmp/install/openstego.sh && \
-    /tmp/install/outguess-1.3.sh && \
-    /tmp/install/spectrology.sh && \
-    /tmp/install/steg.sh && \
-    /tmp/install/steganabara.sh && \
-    /tmp/install/stegano.sh && \
-    /tmp/install/stegdetect.sh && \
-    /tmp/install/stegoVeritas.sh && \
-    /tmp/install/stegsolve.sh && \
-    /tmp/install/wine.sh && \
-    /tmp/install/winetricks.sh && \
-    /tmp/install/zsteg.sh && \
+RUN find /tmp/install -name '*.sh' -exec chmod a+x {} + && \
+    find /tmp/install -type f -executable -exec {} \; && \
     rm -rf /tmp/install
 
-RUN apt-get install -y crunch \
-                       cewl \
-                       sonic-visualiser
+
+# Use this section to try new installation scripts.
+# All previous steps will be cached
+#
+# COPY install_dev /tmp/install
+# RUN find /tmp/install -name '*.sh' -exec chmod a+x {} + && \
+#     for f in $(ls /tmp/install/* | sort );do /bin/sh $f;done && \
+#     rm -rf /tmp/install
 
 COPY scripts /opt/scripts
+RUN find /opt/scripts -name '*.sh' -exec chmod a+x {} + && \
+    find /opt/scripts -name '*.py' -exec chmod a+x {} + && \
 ENV PATH="/opt/scripts:${PATH}"
 
 WORKDIR /data

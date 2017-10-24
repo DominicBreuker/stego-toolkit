@@ -1,4 +1,5 @@
 #!/usr/bin/python2
+# WORK IN (early) PROGRESS
 
 import argparse
 import re
@@ -24,18 +25,25 @@ class BitstringAnalyser(object):
             for b in range(len(self.bitstring) / 8):
                 byte = self.bitstring[b*8:(b+1)*8]
                 chars.append(chr(int(''.join([str(bit) for bit in byte]), 2)))
-            result = ''.join(chars)
-            print(" - Conversion to string: \n------------------\n{}\n----------------\n".format(result))
+            self._print_result("string", ''.join(chars))
         except Exception as e:
-            print(" - Conversion to integer: FAILED ({})".format(e.message))
+            self._print_fail("string", e.message)
 
     def _try_convert_to_integer(self):
         try:
-            result = int(self.bitstring, 2)
-            print(" - Conversion to integer: '{}'".format(result))
-            pass
+            self._print_result("integer", int(self.bitstring, 2))
         except Exception as e:
-            print(" - Conversion to integer: FAILED ({})".format(e.message))
+            self._print_fail("integer", e.message)
+
+    def _print_result(self, conversion_type, result):
+        result = str(result)
+        if len(result) > 20:
+            print(" - Conversion to {}: '{}...'".format(conversion_type, result[:20]))
+        else:
+            print(" - Conversion to {}: '{}'".format(conversion_type, result))
+
+    def _print_fail(self, conversion_type, reason):
+        print(" - Conversion to {}: FAILED ({})".format(conversion_type, reason))
 
 
     # @staticmethod
@@ -49,7 +57,7 @@ class BitstringAnalyser(object):
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(prog='BRUTE')
+    parser = argparse.ArgumentParser(prog='EXAMINE')
     parser.add_argument("data", nargs="?", type=bytes,
                         help="Data to analyse")
     return parser.parse_args()
