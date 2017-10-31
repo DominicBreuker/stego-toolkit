@@ -173,6 +173,9 @@ You can use it to open an HTML5 VNC session with your browser to connect to the 
 
 This is a collection of useful Steganography links:
 - You must be able to spot codes. Check out this [cheat sheet](http://www.ericharshbarger.org/epp/code_sheet.pdf) from Eric Harshbarger, which contains many different codes.
+- Cheatsheet describing workflows, things to look for and common tools: [click](https://pequalsnp-team.github.io/cheatsheet/steganography-101)
+- Forensics CTF guide with lots of ideas for stego challenges: [click](https://trailofbits.github.io/ctf/forensics/)
+- File format descriptions as beautiful posters: [click](https://github.com/corkami/pics/blob/master/binary/README.md)
 
 ## References
 
