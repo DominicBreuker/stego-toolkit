@@ -134,6 +134,21 @@ The following filetypes are supported:
 - PNG: `check_png.h` and `brute_png.sh` (running `openstego` and `stegoveritas.py -bruteLSB`)
 
 
+### Wordlist generation
+
+The brute forcing scripts above need wordlists.
+Imho it will very likely not help to use huge standard wordlists like rockyou.
+The scripts are too slow for it and stego challenges seem to not be designed for
+this.
+A more probable scenario is that you have a hunch what the password could be but
+you do not know exactly.
+
+For these cases, several tools to generate wordlists are included:
+- [john](http://www.openwall.com/john/): the community enhanced version of John the Ripper can expand your wordlists. Create a base wordlist with a few candidate passwords and use `john` to create many variants of them. Use `john -wordlist:/path/to/your/wordlist -rules:Single -stdout > /path/to/expanded/wordlist` to apply extensive rules (~x1000) `john -wordlist:/path/to/your/wordlist -rules:Wordlist -stdout > /path/to/expanded/wordlist` for a reduced ruleset (~x50).
+- [crunch](https://tools.kali.org/password-attacks/crunch): can generate small wordlists if you have a pattern in mind. For instance, if you know the passwords ends with 1984 and is 6 letters long, use `crunch 6 6 abcdefghijklmnopqrstuvwxyz -t @@1984` will generate the 26 * 26 = 676 passwords aa1984, ab1984, ... up to zz1984. The format is `crunch <min-length> <max-length> <charset> <options>` and we used the templating option. Check out `less /usr/share/crunch/charset.lst` to see the charsets crunch ships with.
+- [CeWL](https://digi.ninja/projects/cewl.php): can generate wordlists if you know a website is related to a password. For instance, run `cewl -d 0 -m 8 https://en.wikipedia.org/wiki/Donald_Trump` if you suspect a picture of Donald Trump contains an encrypted hidden message. The command scrapes the site and extracts strings at least 8 characters long.
+
+
 ## Steganography examples
 
 The image contains a sample image and audio file each in different formats:

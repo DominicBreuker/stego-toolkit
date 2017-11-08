@@ -1,2 +1,3 @@
 data
 examples/stego-files
+*.swp 
