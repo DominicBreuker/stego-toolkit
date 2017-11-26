@@ -123,6 +123,16 @@ echo "#################################"
 stegano-red reveal --input $FILE
 
 echo
+echo "##############################"
+echo "########## LSBSteg  ##########"
+echo "##############################"
+
+# seems to fail most of the time we did not encode something with it
+# no file will be created in these cases
+LSBSteg decode -i $FILE -o $TMP_FILE 2>/dev/null
+check_result_file $TMP_FILE
+
+echo
 echo "##################################"
 echo "########## stegoVeritas ##########"
 echo "##################################"

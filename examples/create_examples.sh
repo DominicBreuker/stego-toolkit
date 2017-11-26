@@ -120,7 +120,20 @@ echo "... stegano-lsb-set (no passphrase)"
 
 echo ""
 echo "... stegano-red (no passphrase, encoding base64 manually)"
-# stegano-red hide --input $COVER_IMAGE -m $SECRET_MESSAGE_B64 --output $STEGO_FILES_FOLDER/stegano-red.png
+stegano-red hide --input $COVER_IMAGE -m $SECRET_MESSAGE_B64 --output $STEGO_FILES_FOLDER/stegano-red.png
+
+############# cloackedpixel #############
+
+echo ""
+echo "... cloackedpixel"
+cloackedpixel hide $COVER_IMAGE $SECRET_MESSAGE $PASSPHRASE
+mv $COVER_IMAGE-stego.png $STEGO_FILES_FOLDER/cloackedpixel.png
+
+############# LSBSteg #############
+
+echo ""
+echo "... LSBSteg"
+LSBSteg encode -i $COVER_IMAGE -o $STEGO_FILES_FOLDER/LSBSteg.png -f $SECRET_MESSAGE
 
 ###############################
 ############# WAV #############
