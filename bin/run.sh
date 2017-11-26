@@ -15,5 +15,6 @@ docker run -it \
            -v $PROJECT_ROOT/data:/data \
            -v $PROJECT_ROOT/scripts:/opt/scripts \
            -v $PROJECT_ROOT/examples:/examples \
+           -v $PROJECT_ROOT/install_dev:/install_dev \
            $IMAGE_NAME \
            /bin/bash

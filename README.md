@@ -30,6 +30,10 @@ Check out the following sections for more information:
 
 ## Demo
 
+Start with `docker run -it --rm -v $(pwd)/data:/data dominicbreuker/stego-toolkit /bin/bash`.
+You will be dropped into a container shell in work dir `/data`.
+Your host folder `$(pwd)/data` will be mounted and the images inside will be accessible.
+
 ![animated demo gif](https://i.imgur.com/UW8CKFV.gif)
 
 ## Tools
@@ -94,6 +98,8 @@ Some tools are supported by the brute force scripts available in this Docker ima
 | [spectrology](https://github.com/solusipse/spectrology) | Audio (WAV) | Encodes an image in the spectrogram of an audio file. | `TODO` | Use GUI tool `sonic-visualiser` |
 | [stegano](https://github.com/cedricbonhomme/Stegano) | Images (PNG) | Hides data with various (LSB-based) methods. Provides also some screening tools. | `stegano-lsb hide --input cover.jpg -f secret.txt -e UTF-8 --output stego.png` or `stegano-red hide --input cover.png -m "secret msg" --output stego.png` or `stegano-lsb-set hide --input cover.png -f secret.txt -e UTF-8 -g $GENERATOR --output stego.png` for various generators (`stegano-lsb-set list-generators`) | `stegano-lsb reveal -i stego.png -e UTF-8 -o output.txt` or `stegano-red reveal -i stego.png` or `stegano-lsb-set reveal -i stego.png -e UTF-8 -g $GENERATOR -o output.txt`
 | [Steghide](http://steghide.sourceforge.net/) | Images (JPG, BMP) and Audio (WAV, AU) | Versatile and mature tool to encrypt and hide data. | `steghide embed -f -ef secret.txt -cf cover.jpg -p password -sf stego.jpg` | `steghide extract -sf stego.jpg -p password -xf output.txt`
+| [cloackedpixel](https://github.com/livz/cloacked-pixel) | Images (PNG) | LSB stego tool for images | `cloackedpixel hide cover.jpg secret.txt password` creates `cover.jpg-stego.png` | `cloackedpixel extract cover.jpg-stego.png output.txt password`
+| [LSBSteg](https://github.com/RobinDavid/LSB-Steganography) | Images (PNG, BMP, ...) in uncompressed formats | Simple LSB tools with very nice and readable Python code | `LSBSteg encode -i cover.png -o stego.png -f secret.txt` | `LSBSteg decode -i stego.png -o output.txt` |
 
 
 ### Steganography GUI tools
@@ -116,6 +122,7 @@ Many different ways are possible (e.g., [mount UNIX sockets](https://medium.com/
 | [Stegosuite](https://stegosuite.org/) | Images (JPG, GIF, BMP) | Can encrypt and hide data in images. Actively developed. | `stegosuite` |
 | [OpenPuff](http://embeddedsw.net/OpenPuff_Steganography_Home.html) | Images, Audio, Video (many formats) | Sophisticated tool with long history. Still maintained. Windows tool running in wine. | `openpuff` |
 | [DeepSound](http://jpinsoft.net/deepsound) | Audio (MP3, WAV) | Audio stego tool trusted by Mr. Robot himself. Windows tool running in wine (very hacky, requires VNC and runs in virtual desktop, MP3 broken due to missing DLL!) | `deepsound` only in VNC session |
+| [cloackedpixel-analyse](https://github.com/livz/cloacked-pixel) | Images (PNG) | LSB stego visualization for PNGs - use it to detect suspiciously random LSB values in images (values close to 0.5 may indicate encrypted data is embedded) | `cloackedpixel-analyse image.png` |
 
 
 ### Screening scripts
@@ -127,11 +134,11 @@ Since the applicable tools differ by filet type, each file type has different sc
 
 For each file type, there are two kinds of scripts:
 - `XXX_check.sh <stego-file>`: runs basic screening tools and creates a report (+ possibly a directory with reports in files)
-- `XXX_brute.sh <stego-file> <wordlist>`: tries to extract a hidden message from a stego file with various tools using a wordlist (`cewl` and `crunch` are installed to generate lists - keep them small).
+- `XXX_brute.sh <stego-file> <wordlist>`: tries to extract a hidden message from a stego file with various tools using a wordlist (`cewl`, `john` and `crunch` are installed to generate lists - keep them small).
 
 The following filetypes are supported:
-- JPG: `check_jpg.h` and `brute_jpg.sh` (running `steghide`, `outguess`, `outguess-0.13`, `stegbreak`, `stegoveritas.py -bruteLSB`)
-- PNG: `check_png.h` and `brute_png.sh` (running `openstego` and `stegoveritas.py -bruteLSB`)
+- JPG: `check_jpg.h` and `brute_jpg.sh` (brute running `steghide`, `outguess`, `outguess-0.13`, `stegbreak`, `stegoveritas.py -bruteLSB`)
+- PNG: `check_png.h` and `brute_png.sh` (brute running `openstego` and `stegoveritas.py -bruteLSB`)
 
 
 ### Wordlist generation
@@ -180,10 +187,32 @@ You can use it to open an HTML5 VNC session with your browser to connect to the 
 
 ![animated demo gif - SSH + X11](https://i.imgur.com/aRJtbnP.gif)
 
+Commands in the GIF for copy & paste:
+```
+# in 1st host shell
+docker run -it --rm -p 127.0.0.1:22:22 dominicbreuker/stego-toolkit /bin/bash
+
+# inside container shell
+start_ssh.sh
+
+# in 2nd host shell (use it to launch GUI apps afterwards)
+ssh -X -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no root@localhost
+```
+
 ### Using Browser and VNC
 
 ![animated demo gif - Browser + VNC](https://i.imgur.com/3tkw498.gif)
 
+Commands in the GIF for copy & paste:
+```
+# in 1st host shell
+docker run -it --rm -p 127.0.0.1:6901:6901 dominicbreuker/stego-toolkit /bin/bash
+
+# inside container shell
+start_vnc.sh
+
+# in browser, connect with: http://localhost:6901/?password=<password_from_start_vnc>
+```
 ## Link collection
 
 This is a collection of useful Steganography links:
