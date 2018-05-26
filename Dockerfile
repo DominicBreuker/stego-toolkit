@@ -1,5 +1,7 @@
 FROM debian:stretch-20170907
 
+ENV DEBIAN_FRONTEND noninteractive
+
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y apt-utils \
@@ -23,13 +25,9 @@ RUN apt-get update && \
                        crunch \
                        cewl \
                        sonic-visualiser \
-                       atomicparsley
-
-RUN pip3 install python-magic
-
-RUN pip install tqdm
-
-ENV DEBIAN_FRONTEND noninteractive
+                       atomicparsley && \
+    pip3 install python-magic && \
+    pip install tqdm
 
 COPY install /tmp/install
 RUN chmod a+x /tmp/install/*.sh && \
