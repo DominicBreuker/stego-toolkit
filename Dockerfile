@@ -32,10 +32,9 @@ RUN pip install tqdm
 ENV DEBIAN_FRONTEND noninteractive
 
 COPY install /tmp/install
-RUN find /tmp/install -name '*.sh' -exec chmod a+x {} + && \
-    find /tmp/install -type f -executable -exec {} \; && \
+RUN chmod a+x /tmp/install/*.sh && \
+    for i in /tmp/install/*.sh;do echo $i && $i;done && \
     rm -rf /tmp/install
-
 
 # Use this section to try new installation scripts.
 # All previous steps will be cached
