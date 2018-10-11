@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 mkdir -p /opt/f5
 
 # F5 algorithm in Python
