@@ -4,6 +4,8 @@ set -e
 
 # Download
 git clone https://github.com/cedricbonhomme/Stegano.git /opt/Stegano
+cd /opt/Stegano
+git checkout v0.8.2
 
 # Install
 pip3 install -r /opt/Stegano/requirements.txt

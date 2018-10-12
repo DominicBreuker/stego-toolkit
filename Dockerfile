@@ -42,6 +42,8 @@ RUN chmod a+x /tmp/install/*.sh && \
 #     for f in $(ls /tmp/install/* | sort );do /bin/sh $f;done && \
 #     rm -rf /tmp/install
 
+COPY examples /examples
+
 COPY scripts /opt/scripts
 RUN find /opt/scripts -name '*.sh' -exec chmod a+x {} + && \
     find /opt/scripts -name '*.py' -exec chmod a+x {} +
