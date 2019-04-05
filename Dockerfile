@@ -25,6 +25,7 @@ RUN apt-get update && \
                        crunch \
                        cewl \
                        sonic-visualiser \
+                       xxd \
                        atomicparsley && \
     pip3 install python-magic && \
     pip install tqdm
