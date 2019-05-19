@@ -101,6 +101,7 @@ Some tools are supported by the brute force scripts available in this Docker ima
 | [cloackedpixel](https://github.com/livz/cloacked-pixel) | Images (PNG) | LSB stego tool for images | `cloackedpixel hide cover.jpg secret.txt password` creates `cover.jpg-stego.png` | `cloackedpixel extract cover.jpg-stego.png output.txt password`
 | [LSBSteg](https://github.com/RobinDavid/LSB-Steganography) | Images (PNG, BMP, ...) in uncompressed formats | Simple LSB tools with very nice and readable Python code | `LSBSteg encode -i cover.png -o stego.png -f secret.txt` | `LSBSteg decode -i stego.png -o output.txt` |
 | [f5](https://github.com/jackfengji/f5-steganography) | Images (JPG) | F5 Steganographic Algorithm with detailed info on the process | `f5 -t e -i cover.jpg -o stego.jpg -d 'secret message'` | `f5 -t x -i stego.jpg 1> output.txt` |
+| [stegpy](https://github.com/dhsdshdhk/stegpy) | Images (PNG, GIF, BMP, WebP) and Audio (WAV) | Simple steganography program based on the LSB method | `stegpy secret.jpg cover.png` | `stegpy _cover.png` |
 
 
 ### Steganography GUI tools
