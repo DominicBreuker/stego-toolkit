@@ -10,7 +10,7 @@ The image comes pre-installed with many popular tools (see list [below](#tools))
 ## Usage
 
 First make sure you have Docker installed ([how to](https://docs.docker.com/engine/installation/)).
-Then you can use the shell scripts `bin/buid.sh` and `bin/run.sh` in this repo to build the image and run the container.
+Then you can use the shell scripts `bin/build.sh` and `bin/run.sh` in this repo to build the image and run the container.
 You will be dropped into a bash shell inside the container.
 It will have the `data` folder mounted, into which you can put the files to analyze.
 
