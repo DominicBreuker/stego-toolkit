@@ -110,4 +110,4 @@ echo "##################################"
 UUID=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`
 TMP_DIR=/data/stegoVeritas/$UUID
 mkdir -p $TMP_DIR
-stegoveritas.py $FILE -outDir $TMP_DIR -meta -imageTransform -colorMap -trailing
+stegoveritas $FILE -out $TMP_DIR -meta -imageTransform -colorMap -trailing
