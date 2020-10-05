@@ -139,8 +139,8 @@ For each file type, there are two kinds of scripts:
 - `XXX_brute.sh <stego-file> <wordlist>`: tries to extract a hidden message from a stego file with various tools using a wordlist (`cewl`, `john` and `crunch` are installed to generate lists - keep them small).
 
 The following file types are supported:
-- JPG: `check_jpg.h` and `brute_jpg.sh` (brute running `steghide`, `outguess`, `outguess-0.13`, `stegbreak`, `stegoveritas.py -bruteLSB`)
-- PNG: `check_png.h` and `brute_png.sh` (brute running `openstego` and `stegoveritas.py -bruteLSB`)
+- JPG: `check_jpg.sh` and `brute_jpg.sh` (brute running `steghide`, `outguess`, `outguess-0.13`, `stegbreak`, `stegoveritas.py -bruteLSB`)
+- PNG: `check_png.sh` and `brute_png.sh` (brute running `openstego` and `stegoveritas.py -bruteLSB`)
 
 
 ### Wordlist generation
