@@ -22,4 +22,4 @@ TMP_DIR=/data/stegoVeritas/$UUID
 mkdir -p $TMP_DIR
 
 echo "Running stegoVerits takes time. Be patient and check out '$TMP_DIR' afterwards..."
-stegoveritas.py $FILE -outDir $TMP_DIR -meta -bruteLSB -imageTransform -colorMap -trailing
+stegoveritas $FILE -outDir $TMP_DIR -meta -bruteLSB -imageTransform -colorMap -trailing
